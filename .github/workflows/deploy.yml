@@ -39,10 +39,10 @@ jobs:
       - name: Disable Jekyll
         run: touch docs/.nojekyll
 
-      - name: Deploy to GitHub Pages (gh-pages branch)
+      - name: Deploy to GitHub Pages (oi-app branch)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
+          branch: oi-app
           folder: docs
           clean: true
-          token: ${{ secrets.GH_PAGES_DEPLOY }}
+          token: ${{ secrets.OI_APP_DEPLOY }}
