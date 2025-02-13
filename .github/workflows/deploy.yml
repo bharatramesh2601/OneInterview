@@ -1,0 +1,48 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Runs the workflow when pushing to main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Install project dependencies
+        run: npm install
+
+      - name: Build Angular app (Browser Only)
+        run: ng build --configuration production --base-href /bharatramesh.dev/
+
+      - name: Move files to correct location
+        run: |
+          if [ -d "docs/browser" ]; then
+            mv docs/browser/* docs/
+            rm -rf docs/browser
+          fi
+
+      - name: Disable Jekyll
+        run: touch docs/.nojekyll
+
+      - name: Deploy to GitHub Pages (gh-pages branch)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: true
+          token: ${{ secrets.GH_PAGES_DEPLOY }}
