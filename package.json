@@ -1,5 +1,5 @@
 {
-  "name": "bharatramesh.dev",
+  "name": "oneinterview",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:bharatramesh.dev": "node dist/bharatramesh.dev/server/server.mjs"
+    "serve:ssr:oneinterview": "node dist/oneinterview/server/server.mjs"
   },
   "private": true,
   "dependencies": {
